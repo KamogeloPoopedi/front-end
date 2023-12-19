@@ -20,7 +20,7 @@ export class SearchComponent {
         this.users = resultData;
       },
       (error) => {
-        console.error('Error searching users', error);
+        console.error('User does not  exists');
       }
     );
   }
