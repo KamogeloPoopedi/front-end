@@ -1,11 +1,9 @@
 <!-- search.component.html -->
 <input type="text" [(ngModel)]="query" (input)="searchUsers()" placeholder="Search for names.." title="Type in a name" />
 
-<div class="user-grid">
+<div class="user-list">
   <div *ngFor="let user of users" class="user-item">
-    <div class="avatar">
-      {{ user.userName.charAt(0).toUpperCase() }}
-    </div>
+    <mat-icon class="avatar">account_circle</mat-icon>
     <span class="username">{{ user.userName }}</span>
   </div>
 </div>

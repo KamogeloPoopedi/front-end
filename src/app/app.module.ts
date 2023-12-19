@@ -6,12 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
-
 import { LoginComponent } from './login/login.component';
-
 import { SearchComponent } from './search/search.component';
 import { AuthServiceService } from './auth-service.service';
-import { UserServicaService } from './user-servica.service'; // Import the second service
+import { UserServicaService } from './user-servica.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,9 @@ import { UserServicaService } from './user-servica.service'; // Import the secon
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatIconModule
   ],
   providers: [AuthServiceService, UserServicaService], // Include both services here
   bootstrap: [AppComponent]
