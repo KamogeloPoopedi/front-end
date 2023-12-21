@@ -1,26 +1,28 @@
 import { Component } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { AuthServiceService } from '../auth-service.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {email: string="";
-password: string="";
-userName: string="";
-constructor(private http:HttpClient){
+export class LoginComponent {
+  password: string = '';
+  userName: string = '';
+ 
 
-}
-login(){
-  let bodyData={
-    "userName": this.userName,
-    "password": this.password
-  };
-  this.http.post("http://localhost:8080/api/login", bodyData,{responseType: 'text'}).subscribe((resultData:any)=>{
-    console.log(resultData);
-    alert("user logged in");
-  
-  })
-}
+  constructor(private authService: AuthServiceService) {}
+
+  login() {
+    const credentials = { userName: this.userName, password: this.password };
+    this.authService.login(credentials).subscribe(
+      (resultData: any) => {
+        console.log(resultData);
+        alert('User logged in');
+      },
+      (error) => {
+        console.error('Login failed', error);
+      }
+    );
+  }
 }
