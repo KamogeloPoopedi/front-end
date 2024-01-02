@@ -1,0 +1,27 @@
+/* chat-list.component.css */
+
+.chat-list-container {
+    background-color: #ffffff; /* White background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+  }
+  
+  .header {
+    color: #3498db; /* Blue color */
+  }
+  
+  .contact-item {
+    list-style-type: none;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #3498db; /* Blue background */
+    color: #ffffff; /* White text color */
+    border-radius: 5px;
+  }
+  
+  .no-contacts-message {
+    color: #333333; /* Dark text color */
+    margin-top: 10px;
+  }
+  

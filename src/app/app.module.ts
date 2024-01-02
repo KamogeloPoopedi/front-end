@@ -13,6 +13,7 @@ import { UserServicaService } from './user-servica.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { ChatListComponent } from './chat-list/chat-list.component';
 
 
 
@@ -24,6 +25,8 @@ import { MatButtonModule } from '@angular/material/button';
     RegisterComponent,
     LoginComponent,
     SearchComponent,
+    ChatListComponent,
+    ChatListComponent,
    
   
   ],
