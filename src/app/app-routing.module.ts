@@ -1,11 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { ChatListComponent } from './chat-list/chat-list.component';
+const routes: Routes = [
+  { path: 'register', component: RegisterComponent },
+  {path: 'login', component: LoginComponent},
+  {path: 'chat-list', component: ChatListComponent},
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login' },
+];
 
-
-const routes: Routes = [];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [ RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

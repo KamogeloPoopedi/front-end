@@ -6,8 +6,10 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthServiceService {
-  private loggedInUser: any;
     private apiUrl = 'http://localhost:8080/api';
+    private loggedInUser: any | null = null;
+    
+
   
     constructor(private http: HttpClient) { }
   
@@ -19,7 +21,14 @@ export class AuthServiceService {
       return this.http.post(`${this.apiUrl}/login`, credentials, {
          responseType: 'text' });
     }
- 
+    setLoggedInUser(user: any) {
+      this.loggedInUser = user;
+    }
+  
+    // Assume this method is called to retrieve the logged-in user
+    getLoggedInUser(): any | null {
+      return this.loggedInUser;
+    }
   
 }
 

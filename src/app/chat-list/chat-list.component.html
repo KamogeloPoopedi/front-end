@@ -1,18 +1,30 @@
-<!-- chat-list.component.html -->
-
-<div class="chat-list-container">
-    <h2 class="header">Chat List</h2>
-  
-    <div *ngIf="contacts && contacts.length > 0">
-      <ul>
-        <li *ngFor="let contact of contacts" class="contact-item">
-          {{ contact.name }} <!-- Adjust based on your User model -->
-        </li>
-      </ul>
-    </div>
-  
-    <div *ngIf="!contacts || contacts.length === 0" class="no-contacts-message">
-      No contacts available.
+<!-- <div class="chat-list">
+  <div class="header">Chats</div>
+  <div *ngFor="let contact of contactList" class="contact-item">
+      <mat-icon class="profile-icon">account_circle</mat-icon>
+      <div class="contact-details">
+          <span class="contact-name">{{ contact.userName }}</span>
+    
+      </div>
+  </div>
+</div> -->
+<div class="chat-container">
+  <div class="chat-list">
+    <div class="header">Chats</div>
+    <div *ngFor="let contact of contactList" class="contact-item" (click)="selectContact(contact)">
+      <mat-icon class="profile-icon">account_circle</mat-icon>
+      <div class="contact-details">
+        <span class="contact-name">{{ contact.userName }}</span>
+       
+      </div>
     </div>
   </div>
-  
+  <div class="chat-thread">
+    <div class="thread-header">
+      <!-- {{ selectedContact?.userName || 'Select a contact to chat' }} -->
+      {{ selectedContact ? 'Chat with ' + selectedContact.userName : 'Select a contact to chat' }}
+    </div>
+    <!-- Add chat messages or other components related to the chat thread here -->
+  </div>
+</div>
+

@@ -8,7 +8,7 @@ import { Observable, switchMap } from 'rxjs';
 })
 export class UserServicaService {
   private apiUrl = 'http://localhost:8080/api';
-  private userUrl = 'http://localhost:8080/chat'
+  private baseUrl = 'http://localhost:8080/api/contacts';
 
   constructor(private http: HttpClient) { }
   
@@ -19,14 +19,8 @@ export class UserServicaService {
   addContact(userId: number, contactId: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/${userId}/add/${contactId}`, {});
   }
-  getCurrentUserId(): Observable<number> {
-    return this.http.get<number>(this.userUrl);
-  }
-  getContacts():Observable<any>{
-    // return this.http.get(`${this.userUrl}/list?userId=${userId}`)
-    return this.getCurrentUserId().pipe(
-      switchMap(userId => this.http.get(`${this.userUrl}/list?userId=${userId}`))
-    );
-  }
+  getContactList(userId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/list?userId=${userId}`);
+}
   
 }
