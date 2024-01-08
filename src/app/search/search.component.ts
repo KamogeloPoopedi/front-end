@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { UserServicaService } from '../user-servica.service';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -12,6 +12,7 @@ export class SearchComponent {
   query: string = ''; 
   users: any[] = [];
   
+  @Output() searchEvent = new EventEmitter<string>();
 
   constructor(private userService: UserServicaService) {}
   
@@ -19,6 +20,7 @@ export class SearchComponent {
     this.userService.searchUsers(this.query).subscribe(
       (resultData: any) => {
         this.users = resultData;
+        this.searchEvent.emit(this.query);
       },
       (error) => {
         console.error('User does not  exists');

@@ -1,5 +1,7 @@
 <!-- search.component.html -->
+<!-- search.component.html -->
 <input type="text" [(ngModel)]="query" (input)="searchUsers()" placeholder="Search for a user.." title="Type a username" />
+
 
 <div class="user-list">
   <div *ngFor="let user of users" class="user-item">
