@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { UserServicaService } from '../user-servica.service';
-import { SearchComponent } from '../search/search.component';
 import { AuthServiceService } from '../auth-service.service';
 import { UserDto } from '../login/login.component';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-chat-list',
   templateUrl: './chat-list.component.html',
@@ -11,10 +11,10 @@ import { UserDto } from '../login/login.component';
 export class ChatListComponent {
     contactList: any[] = [];
     selectedContact: any | null = null;
-    query : string = ''
+    query: string = ''; 
+    users: any[] = [];
     constructor( private userService: UserServicaService, private authService : AuthServiceService){}
-    
-    @ViewChild(SearchComponent) searchComponent!: SearchComponent;
+
 
     ngOnInit(): void {
       this.loadContactList();
@@ -35,27 +35,48 @@ export class ChatListComponent {
     selectContact(contact: any) {
       this.selectedContact = contact;
     }
-    searchUsers( query : string) {
-      this.searchComponent.searchUsers();
-    }
-    handleSearch(query: string) {
-      // You can perform additional actions if needed
-      console.log('Search performed with query:', query);
-    }
-    addContact(){
-      this.authService.getLoggedInUser().then((loggedInUser: UserDto | null) => {
-        if (loggedInUser && loggedInUser.userId !== undefined && this.selectedContact) {
-          const userId = loggedInUser.userId;
-          const contactId = this.selectedContact.contactId;
-    
-          if (userId && contactId) {
-            this.searchComponent.addContact(userId, contactId);
-          } else {
-            console.error('Invalid userId or contactId.');
-          }
-        } else {
-          console.error('User not logged in or selected contact not defined.');
+    searchUsers() {
+      this.userService.searchUsers(this.query).subscribe(
+        (resultData: any) => {
+          this.users = resultData;
+          // this.searchEvent.emit(this.query);
+          
+        },
+        (error) => {
+          console.error('User does not  exists');
         }
-      });
+      );
     }
+    // addContact(userId: number, contactUserId: number) {
+    //   console.log('Attempting to add contact with userId:', userId, 'and contactId:', contactUserId);
+    //   if (!!isNaN(userId) && !isNaN(contactUserId) && userId > 0 && contactUserId > 0) {
+    //     // Call the addContact method
+    //     this.userService.addContact(userId, contactUserId).subscribe(
+    //       () => {
+    //         console.log('Contact added successfully');
+            
+    //         // Optionally, you can update the UI or perform any additional actions
+    //       },
+    //       (error) => {
+    //         console.error('Error adding contact', error);
+    //       }
+    //     );
+    //   } else {
+    //     console.error('Invalid userId or contactId');
+    //   }
+    // }
+    addContact(contactUserId: number) {
+      const userIdString: string | null = sessionStorage.getItem("currentuser");
+      const userId: number = userIdString ? parseInt(userIdString, 10) : 0;
+
+      if (contactUserId !== undefined) {
+        this.userService.addContact(userId, contactUserId).subscribe(
+          // ... rest of the code
+        );
+      } else {
+        console.error('contactUserId is undefined');
+      }
+    }
+    
+
 }

@@ -38,7 +38,20 @@
 		</div>
 		<div id="search">
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="Search contacts..." />
+      <input type="text" [(ngModel)]="query" (input)="searchUsers()" placeholder="Search for names.." title="Type in a name" />
+        <!-- <input type="text" [(ngModel)]="query" (input)="searchUsers()" 
+        placeholder="Search for a user.." title="Type a username" /> -->
+        <div class="user-list">
+          <div class="user-list" *ngIf="query && users.length > 0">
+            <div *ngFor="let user of users" class="user-item">
+              <mat-icon class="avatar">account_circle</mat-icon>
+              <span class="username">{{ user.userName }}</span>
+              <button mat-icon-button (click)="addContact(user.userId)">
+                <mat-icon class="add-icon">add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
 		</div>
 		<div id="contacts">
 					<div class="wrap">

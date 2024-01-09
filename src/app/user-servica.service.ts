@@ -16,8 +16,8 @@ export class UserServicaService {
     return this.http.get(`${this.apiUrl}/search?query=${query}`);
 
   }
-  addContact(userId: number, contactId: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${userId}/add/${contactId}`, {});
+  addContact(userId: number, contactUserId: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/${userId}/add/${contactUserId}`, {});
   }
   getContactList(userId: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/list?userId=${userId}`);

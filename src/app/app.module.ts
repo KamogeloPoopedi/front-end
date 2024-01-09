@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { SearchComponent } from './search/search.component';
 import { AuthServiceService } from './auth-service.service';
 import { UserServicaService } from './user-servica.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,7 +24,6 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    SearchComponent,
     ChatListComponent,
    
   
