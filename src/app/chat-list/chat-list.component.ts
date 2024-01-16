@@ -11,19 +11,30 @@ import { MatIconModule } from '@angular/material/icon';
 export class ChatListComponent {
     contactList: any[] = [];
     selectedContact: any | null = null;
-    query: string = ''; 
+    query: string = '';
     users: any[] = [];
+    loggedinUsername : string = '';
+    userdata! : UserDto ; 
+    userIdString: any = sessionStorage.getItem("currentUser");
+  
     constructor( private userService: UserServicaService, private authService : AuthServiceService){}
 
 
     ngOnInit(): void {
       this.loadContactList();
+    //   this.loggedinUsername = this.authService.getCurrentUsername();
+    // console.log('Welcom to your chats: ' , this.loggedinUsername);
+      
   }
+  
   loadContactList() {
-    const userIdString: string | null = sessionStorage.getItem("currentuser");
-    const userId: number = userIdString ? parseInt(userIdString, 10) : 0;
-
-    this.userService.getContactList(userId).subscribe(
+   
+    if(this.userIdString)
+    {
+       this.userdata = JSON.parse(this.userIdString); 
+      this.loggedinUsername = this.userdata.userName;
+  
+      this.userService.getContactList(this.userdata.userId).subscribe(
         (data) => {
             this.contactList = data;
         },
@@ -32,6 +43,11 @@ export class ChatListComponent {
       }
       );
     }
+
+    
+    }
+
+
     selectContact(contact: any) {
       this.selectedContact = contact;
     }
@@ -47,28 +63,11 @@ export class ChatListComponent {
         }
       );
     }
-    // addContact(userId: number, contactUserId: number) {
-    //   console.log('Attempting to add contact with userId:', userId, 'and contactId:', contactUserId);
-    //   if (!!isNaN(userId) && !isNaN(contactUserId) && userId > 0 && contactUserId > 0) {
-    //     // Call the addContact method
-    //     this.userService.addContact(userId, contactUserId).subscribe(
-    //       () => {
-    //         console.log('Contact added successfully');
-            
-    //         // Optionally, you can update the UI or perform any additional actions
-    //       },
-    //       (error) => {
-    //         console.error('Error adding contact', error);
-    //       }
-    //     );
-    //   } else {
-    //     console.error('Invalid userId or contactId');
-    //   }
-    // }
-    addContact(contactUserId: number) {
-      const userIdString: string | null = sessionStorage.getItem("currentuser");
-      const userId: number = userIdString ? parseInt(userIdString, 10) : 0;
 
+    addContact(contactUserId: number) {
+      
+      const userId: number = this.userdata.userId;
+      console.log('userIdString:', userId);
       if (contactUserId !== undefined) {
         this.userService.addContact(userId, contactUserId).subscribe(
           // ... rest of the code

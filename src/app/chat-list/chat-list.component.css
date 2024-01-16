@@ -59,6 +59,16 @@
   font-weight: bold;
   margin-bottom: 10px;
 } **/
+.thread-header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.chat-thread {
+  width: 70%;
+  padding: 20px;
+  border-left: 1px solid #e8e8e8;  
+}
 .chat-container {
   display: flex;
   max-width: 800px; /* Adjust the maximum width as needed */
@@ -156,7 +166,7 @@ body {
   height: 92vh;
   min-height: 300px;
   max-height: 720px;
-  background: #E6EAEA;
+  background: #489292;
 }
 @media screen and (max-width: 360px) {
   #frame {
@@ -743,6 +753,14 @@ body {
   bottom: 0;
   width: 100%;
   z-index: 99;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f0f0f0; /* Light gray background color */
+   margin-top: auto;
 }
 #frame .content .message-input .wrap {
   position: relative;
