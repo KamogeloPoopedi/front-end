@@ -3,6 +3,7 @@ import { UserServicaService } from '../user-servica.service';
 import { AuthServiceService } from '../auth-service.service';
 import { UserDto } from '../login/login.component';
 import { MatIconModule } from '@angular/material/icon';
+import { WebsocketService } from '../websocket.service';
 @Component({
   selector: 'app-chat-list',
   templateUrl: './chat-list.component.html',
@@ -17,7 +18,8 @@ export class ChatListComponent {
     userdata! : UserDto ; 
     userIdString: any = sessionStorage.getItem("currentUser");
   
-    constructor( private userService: UserServicaService, private authService : AuthServiceService){}
+    constructor( private userService: UserServicaService, private authService : AuthServiceService,
+      private webSocketService: WebsocketService){}
 
 
     ngOnInit(): void {
@@ -50,6 +52,7 @@ export class ChatListComponent {
 
     selectContact(contact: any) {
       this.selectedContact = contact;
+      // this.webSocketService.sendMessage(contact.content, contact.receiverId)
     }
     searchUsers() {
       this.userService.searchUsers(this.query).subscribe(

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Stomp, CompatClient, StompSubscription } from '@stomp/stompjs';
 import { Observable, Subject } from 'rxjs';
+import { AuthServiceService } from './auth-service.service';
+import { Message } from './message';
 
 @Injectable({
   providedIn: 'root'
@@ -12,22 +14,25 @@ export class WebsocketService {
 
   private messageSubject = new Subject<any>();
 
-  constructor( ) {  this.initializeWebSocketConnection();}
+  constructor(private authService: AuthServiceService ) {  this.initializeWebSocketConnection();}
   initializeWebSocketConnection() {
     this.stompClient = Stomp.over(() => new WebSocket(this.serverUrl));
     
     this.stompClient.connect({}, () => {
       this.stompClient.subscribe(this.topic, (message) => {
-        this.messageSubject.next(JSON.parse(message.body));
+        const parsedMessage = JSON.parse(message.body) as Message;
+        this.messageSubject.next(parsedMessage);
       });
     });
   }
 
-  sendMessage(message: string) {
-    this.stompClient.send('/app/send', {}, JSON.stringify({ content: message }));
+  sendMessage(content: string, receiverId: number) {
+    const senderId = this.authService.getLoggedInUser();
+    const message: Message = {content, senderId, receiverId};
+    this.stompClient.send('/app/send', {}, JSON.stringify( message ));
   }
 
-  receiveMessages(): Observable<any> {
+  receiveMessages(): Observable<Message> {
     return this.messageSubject.asObservable();
   }
 

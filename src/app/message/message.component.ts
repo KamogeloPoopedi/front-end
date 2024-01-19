@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { WebsocketService } from '../websocket.service';
 import { Subscription } from 'rxjs';
 import { UserServicaService } from '../user-servica.service';
+import { AuthServiceService } from '../auth-service.service';
+import { Message } from '../message';
+
 
 @Component({
   selector: 'app-message',
@@ -11,12 +14,13 @@ import { UserServicaService } from '../user-servica.service';
 })
 export class MessageComponent {
   messageInput: string = '';
-  receivedMessages: string[] = [];
+  receivedMessages: Message[] = [];
   private messageSubscription: Subscription;
 
-  constructor(private webSocketService: WebsocketService) {
+  constructor(private webSocketService: WebsocketService, private authService: AuthServiceService) {
     this.messageSubscription = this.webSocketService.receiveMessages().subscribe((message) => {
-      this.receivedMessages.push(message.content);
+      this.receivedMessages.push(message);
+      console.log('Received message:', message);
     });
   }
 
@@ -26,10 +30,15 @@ export class MessageComponent {
 
   sendMessage() {
     
-    if (this.messageInput) {
-      this.webSocketService.sendMessage(this.messageInput);
+    // Assuming you have a method to get the logged-in user's ID
+    const senderId = this.authService.getLoggedInUser()/* Set the recipient user's ID here */;
+    
+    const receiverId = this.authService.getLoggedInUser()/* Set the recipient user's ID here */;
+    
+    if (this.messageInput && senderId) {
+      this.webSocketService.sendMessage(this.messageInput, receiverId);
       this.messageInput = '';
     }
-  }
 
+}
 }
