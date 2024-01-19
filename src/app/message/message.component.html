@@ -7,4 +7,7 @@
     <input [(ngModel)]="messageInput" placeholder="Type a message..." />
     <button (click)="sendMessage()">Send</button>
   </div>
-  
+  <!-- chat-thread.component.html -->
+<div *ngFor="let message of receivedMessages">
+  {{ message }}
+</div>
