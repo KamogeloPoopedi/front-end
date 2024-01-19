@@ -29,13 +29,7 @@ export class AuthServiceService {
     getLoggedInUser(): any | null {
       return this.loggedInUser;
     }
-  // getCurrentUsername(){
-  //   return this.loggedInUser ? this.loggedInUser.userName : null;
-  // }
-  // getUsernameFromSessionStorage(): string | null {
-  //   const storedUsername = sessionStorage.getItem("currentuser");
-  //   return storedUsername ? JSON.parse(storedUsername).userName : null;
-  // }
+  
 }
 
  

@@ -14,6 +14,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { RouterModule } from '@angular/router'; // Import RouterModule
 import { AppRoutingModule } from './app-routing.module';
+import { MessageComponent } from './message/message.component';
+import { WebsocketService } from './websocket.service';
+
 
 
 
@@ -25,6 +28,9 @@ import { AppRoutingModule } from './app-routing.module';
     RegisterComponent,
     LoginComponent,
     ChatListComponent,
+    MessageComponent,
+    
+
    
   
   ],
@@ -39,7 +45,7 @@ import { AppRoutingModule } from './app-routing.module';
     
  
   ],
-  providers: [AuthServiceService, UserServicaService], 
+  providers: [AuthServiceService, UserServicaService,WebsocketService], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

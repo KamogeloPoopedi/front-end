@@ -72,6 +72,7 @@ export class ChatListComponent {
         this.userService.addContact(userId, contactUserId).subscribe(
           // ... rest of the code
         );
+        
       } else {
         console.error('contactUserId is undefined');
       }

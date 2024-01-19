@@ -17,6 +17,7 @@ export class UserServicaService {
 
   }
   addContact(userId: number, contactUserId: number): Observable<any> {
+    
     return this.http.post(`${this.baseUrl}/${userId}/add/${contactUserId}`, {});
   }
   getContactList(userId: number): Observable<any> {
