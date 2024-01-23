@@ -68,16 +68,18 @@
 <div class="message-input">
   <div class="thread-header">  
      {{ selectedContact ? 'Chat with ' + selectedContact.userName : 'Select a contact to chat' }}
-  </div>  
-  <div class="footer">
-    <div class="message-input">
-      <div class="wrap">
-        <input type="text" placeholder="Write your message..." />
-        <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-        <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-      </div>
+  <!-- </div>  
+  <div *ngIf="isLoggedIn">
+    <h2>Welcome, {{ loggedInUser }}</h2>
+    <div> -->
+      <input [(ngModel)]="message" placeholder="Type a message" />
+      <button (click)="sendMassage(message)">Send</button>
     </div>
+    <ul>
+      <li *ngFor="let msg of messages">{{ msg }}</li>
+    </ul>
   </div>
+  <!-- <div *ngIf="!isLoggedIn">Please log in to use the chat.</div> -->
 </div>
   
 

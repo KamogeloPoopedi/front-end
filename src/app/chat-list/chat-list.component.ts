@@ -1,15 +1,24 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { UserServicaService } from '../user-servica.service';
 import { AuthServiceService } from '../auth-service.service';
 import { UserDto } from '../login/login.component';
 import { MatIconModule } from '@angular/material/icon';
 import { WebsocketService } from '../websocket.service';
+import { MessageComponent } from '../message/message.component';
+import { Message, MessageDTO } from '../message';
 @Component({
   selector: 'app-chat-list',
   templateUrl: './chat-list.component.html',
   styleUrls: ['./chat-list.component.css']
 })
 export class ChatListComponent {
+  @Input() isLoggedIn: boolean = false;
+  @Input() loggedInUser: boolean = false;
+  @Input() message: string = '';
+  @Input() messages: string[] = [];
+  @Output() sendMessage: EventEmitter<void> = new EventEmitter<void>();
+  
+
     contactList: any[] = [];
     selectedContact: any | null = null;
     query: string = '';
@@ -73,13 +82,41 @@ export class ChatListComponent {
       console.log('userIdString:', userId);
       if (contactUserId !== undefined) {
         this.userService.addContact(userId, contactUserId).subscribe(
-          // ... rest of the code
+        
         );
         
       } else {
         console.error('contactUserId is undefined');
       }
     }
+
+    // sendMassage(message : string){
+       
+    //   this.messages.push(message);
+    // }
     
+    sendMassage(message : string) {
+    
+      // Assuming you have a method to get the logged-in user's ID
+      const senderId : any = this.authService.getLoggedInUser();
+   
+      const data : MessageDTO= {
+        receiverId : this.selectedContact.userId ,
+        senderId :senderId.userId ,
+        content : message
+       
+      };
+      console.log(message);
+      this.messages.push(message);
+      // if (this.messageInput && senderId) {
+      //   this.webSocketService.sendMessage(this.messageInput, receiverId);
+      //   this.messageInput = '';
+      // }
+      this.webSocketService.sendMessage(data,1);
+      this.message = '';
+      
+  }
 
 }
+
+

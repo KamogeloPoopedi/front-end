@@ -29,7 +29,7 @@ export class LoginComponent {
           fName: res.fName,
           lName: res.lName
         };
-
+        this.authService.setLoggedInUser(user);
         sessionStorage.setItem("currentUser", JSON.stringify(user));
 
 

@@ -1,13 +1,31 @@
 <!-- message.component.html -->
 
-<div>
+<!-- <div>
     <div *ngFor="let message of receivedMessages">
       {{ message }}
     </div>
     <input [(ngModel)]="messageInput" placeholder="Type a message..." />
     <button (click)="sendMessage()">Send</button>
-  </div>
+  </div> -->
   <!-- chat-thread.component.html -->
-<div *ngFor="let message of receivedMessages">
+<!-- <div *ngFor="let message of receivedMessages">
   {{ message }}
+</div> -->
+<!-- <div *ngIf="LoggedInUser">
+  <h2>Welcome, {{ LoggedInUser }}</h2>
+  <div>
+    <input [(ngModel)]="message" placeholder="Type a message" />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+  <ul>
+    <li *ngFor="let msg of message">{{ msg }}</li>
+  </ul>
 </div>
+<div *ngIf="!isLoggedIn">Please log in to use the chat.</div>
+<app-chat-list
+  [isLoggedIn]="isLoggedIn"
+  [loggedInUser]="LoggedInUser"
+  [message]="message"
+  [messages]="message"
+  (sendMessage)="sendMessage()"
+></app-chat-list> -->

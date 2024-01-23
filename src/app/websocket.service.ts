@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { Stomp, CompatClient, StompSubscription } from '@stomp/stompjs';
 import { Observable, Subject } from 'rxjs';
 import { AuthServiceService } from './auth-service.service';
-import { Message } from './message';
+import { Message, MessageDTO } from './message';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService {
+  next(arg0: string) {
+    throw new Error('Method not implemented.');
+  }
   private stompClient!: CompatClient;
   private serverUrl = 'ws://localhost:8080/ws'; // replace with your server URL
   private topic = '/topic/app';
@@ -26,10 +29,12 @@ export class WebsocketService {
     });
   }
 
-  sendMessage(content: string, receiverId: number) {
+  sendMessage(content: MessageDTO, receiverId: number) {
     const senderId = this.authService.getLoggedInUser();
-    const message: Message = {content, senderId, receiverId};
-    this.stompClient.send('/app/send', {}, JSON.stringify( message ));
+   
+  
+    console.log(content);
+    this.stompClient.send('/app/send', {}, JSON.stringify( content ));
   }
 
   receiveMessages(): Observable<Message> {

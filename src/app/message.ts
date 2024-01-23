@@ -3,3 +3,9 @@ export class Message {
   receiverId?: number;
   content?: string;
 }
+
+export interface MessageDTO{
+    senderId : number,
+    receiverId: number,
+    content : string
+  }
