@@ -2,20 +2,6 @@
 <div id="frame">
 	<div id="sidepanel">
 		<div id="profile">
-			<div class="wrap">
-        
-				<div id="status-options">
-				</div>
-				<div id="expanded">
-					<label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
-					<input name="twitter" type="text" value="mikeross" />
-					<label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
-					<input name="twitter" type="text" value="ross81" />
-					<label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
-					<input name="twitter" type="text" value="mike.ross" />
-				</div>
-			</div>
-      
       <div class="loggedin-username">
         <p id="expanded">Welcome {{ loggedinUsername ? '  ' + loggedinUsername : '' }}</p>
       </div>
@@ -53,33 +39,23 @@
             <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
             <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
           </div>
-          <!-- <footer>
-          <div class="message-input">
-            <div class="wrap">
-            <input type="text" placeholder="Write your message..." />
-            <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-            <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-            </div>
-          </div>
-        </footer> -->
 	</div>
 </div>
 
-<div class="message-input">
+<div *ngIf="selectedContact" class="chat-thread">
   <div class="thread-header">  
      {{ selectedContact ? 'Chat with ' + selectedContact.userName : 'Select a contact to chat' }}
-  <!-- </div>  
-  <div *ngIf="isLoggedIn">
-    <h2>Welcome, {{ loggedInUser }}</h2>
-    <div> -->
+  </div>  
+  <footer>
+      <div class="message-input">
       <input [(ngModel)]="message" placeholder="Type a message" />
       <button (click)="sendMassage(message)">Send</button>
     </div>
+  </footer>
     <ul>
       <li *ngFor="let msg of messages">{{ msg }}</li>
     </ul>
   </div>
-  <!-- <div *ngIf="!isLoggedIn">Please log in to use the chat.</div> -->
 </div>
   
 

@@ -89,15 +89,9 @@ export class ChatListComponent {
         console.error('contactUserId is undefined');
       }
     }
-
-    // sendMassage(message : string){
-       
-    //   this.messages.push(message);
-    // }
-    
     sendMassage(message : string) {
     
-      // Assuming you have a method to get the logged-in user's ID
+      
       const senderId : any = this.authService.getLoggedInUser();
    
       const data : MessageDTO= {
