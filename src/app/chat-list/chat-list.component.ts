@@ -92,11 +92,11 @@ export class ChatListComponent {
     sendMassage(message : string) {
     
       
-      const senderId : any = this.authService.getLoggedInUser();
-   
+      const senderId : any = this.userdata.userId;
+      console.log(senderId);
       const data : MessageDTO= {
+        senderId :senderId,
         receiverId : this.selectedContact.userId ,
-        senderId :senderId.userId ,
         content : message
        
       };
@@ -110,6 +110,7 @@ export class ChatListComponent {
       this.message = '';
       
   }
+
 
 }
 

@@ -44,18 +44,18 @@
 
 <div *ngIf="selectedContact" class="chat-thread">
   <div class="thread-header">  
-     {{ selectedContact ? 'Chat with ' + selectedContact.userName : 'Select a contact to chat' }}
+    {{ 'Chat with ' + selectedContact.userName }}
   </div>  
   <footer>
-      <div class="message-input">
+    <div class="message-input">
       <input [(ngModel)]="message" placeholder="Type a message" />
-      <button (click)="sendMassage(message)">Send</button>
+      <button  (click)="sendMassage(message)">Send</button>
     </div>
   </footer>
-    <ul>
-      <li *ngFor="let msg of messages">{{ msg }}</li>
-    </ul>
-  </div>
+  <ul>
+    <li *ngFor="let msg of messages">{{ msg }}</li>
+  </ul>
 </div>
+
   
 

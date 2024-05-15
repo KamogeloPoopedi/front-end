@@ -22,11 +22,11 @@ export class AuthServiceService {
          responseType: 'text' });
     }
     setLoggedInUser(user: any) {
-      this.loggedInUser = user;
+      this.loggedInUser = user.userId;
     }
   
     // Assume this method is called to retrieve the logged-in user
-    getLoggedInUser(): any | null {
+    getLoggedInUser(): any {
       return this.loggedInUser;
     }
   

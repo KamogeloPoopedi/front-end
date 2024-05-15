@@ -24,6 +24,7 @@ export class WebsocketService {
     this.stompClient.connect({}, () => {
       this.stompClient.subscribe(this.topic, (message) => {
         const parsedMessage = JSON.parse(message.body) as Message;
+
         this.messageSubject.next(parsedMessage);
       });
     });
